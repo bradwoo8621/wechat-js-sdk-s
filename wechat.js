@@ -245,8 +245,8 @@
 		f(function() {
 			V.initEndTime = p();
 		});
-		var O = !1,
-			E = [],
+		var E = !1,
+			O = [],
 			N = {
 				config: function(e) {
 					(C = e), u("config", e);
@@ -515,20 +515,20 @@
 					);
 				},
 				getLocalImgData: function(e) {
-					!1 === O
-						? ((O = !0),
+					!1 === E
+						? ((E = !0),
 							i(
 								"getLocalImgData",
 								{ localId: e.localId },
 								((e._complete = function(e) {
-									if (((O = !1), E.length > 0)) {
-										var n = E.shift();
+									if (((E = !1), O.length > 0)) {
+										var n = O.shift();
 										wx.getLocalImgData(n);
 									}
 								}),
 								e)
 							))
-						: E.push(e);
+						: O.push(e);
 				},
 				getNetworkType: function(e) {
 					var n = function(e) {
@@ -778,6 +778,18 @@
 							{ name: "reLaunch", arg: { url: e.url } },
 							e
 						);
+					},
+					postMessage: function(e) {
+						i(
+							"invokeMiniProgramAPI",
+							{ name: "postMessage", arg: e.data || {} },
+							e
+						);
+					},
+					getEnv: function(n) {
+						f(function() {
+							n({ miniprogram: "miniprogram" === e.__wxjs_environment });
+						});
 					}
 				}
 			},
