@@ -1,0 +1,31 @@
+{
+  "name": "wechat-js-sdk-s",
+  "version": "0.0.1",
+  "description": "wechat javascript sdk for npm, version is same as sdk itself",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradwoo8621/wechat-js-sdk-s.git"
+  },
+  "keywords": [
+    "wechat",
+    "javascript",
+    "sdk",
+    "shadow",
+    "npm"
+  ],
+  "author": "bradwoo8621",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bradwoo8621/wechat-js-sdk-s/issues"
+  },
+  "homepage": "https://github.com/bradwoo8621/wechat-js-sdk-s#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "mocha": "^5.0.0"
+  }
+}
