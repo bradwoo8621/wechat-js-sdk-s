@@ -742,49 +742,59 @@
 				},
 				miniProgram: {
 					navigateBack: function(e) {
-						i(
-							"invokeMiniProgramAPI",
-							{
-								name: "navigateBack",
-								arg: { delta: (e = e || {}).delta || 1 }
-							},
-							e
-						);
+						(e = e || {}),
+							f(function() {
+								i(
+									"invokeMiniProgramAPI",
+									{ name: "navigateBack", arg: { delta: e.delta || 1 } },
+									e
+								);
+							});
 					},
 					navigateTo: function(e) {
-						i(
-							"invokeMiniProgramAPI",
-							{ name: "navigateTo", arg: { url: e.url } },
-							e
-						);
+						f(function() {
+							i(
+								"invokeMiniProgramAPI",
+								{ name: "navigateTo", arg: { url: e.url } },
+								e
+							);
+						});
 					},
 					redirectTo: function(e) {
-						i(
-							"invokeMiniProgramAPI",
-							{ name: "redirectTo", arg: { url: e.url } },
-							e
-						);
+						f(function() {
+							i(
+								"invokeMiniProgramAPI",
+								{ name: "redirectTo", arg: { url: e.url } },
+								e
+							);
+						});
 					},
 					switchTab: function(e) {
-						i(
-							"invokeMiniProgramAPI",
-							{ name: "switchTab", arg: { url: e.url } },
-							e
-						);
+						f(function() {
+							i(
+								"invokeMiniProgramAPI",
+								{ name: "switchTab", arg: { url: e.url } },
+								e
+							);
+						});
 					},
 					reLaunch: function(e) {
-						i(
-							"invokeMiniProgramAPI",
-							{ name: "reLaunch", arg: { url: e.url } },
-							e
-						);
+						f(function() {
+							i(
+								"invokeMiniProgramAPI",
+								{ name: "reLaunch", arg: { url: e.url } },
+								e
+							);
+						});
 					},
 					postMessage: function(e) {
-						i(
-							"invokeMiniProgramAPI",
-							{ name: "postMessage", arg: e.data || {} },
-							e
-						);
+						f(function() {
+							i(
+								"invokeMiniProgramAPI",
+								{ name: "postMessage", arg: e.data || {} },
+								e
+							);
+						});
 					},
 					getEnv: function(n) {
 						f(function() {
