@@ -5,7 +5,6 @@
 			})
 		: n(e, !0);
 
-
 // for webpack purpose, change this to window
 // })(this, function(e, n) {
 })(window, function(e, n) {
@@ -125,7 +124,7 @@
 			(A.appId = C.appId),
 				(A.initTime = V.initEndTime - V.initStartTime),
 				(A.preVerifyTime = V.preVerifyEndTime - V.preVerifyStartTime),
-				b.getNetworkType({
+				N.getNetworkType({
 					isInnerInvoke: !0,
 					success: function(e) {
 						A.networkType = e.networkType;
@@ -167,11 +166,11 @@
 					I.addEventListener("WeixinJSBridgeReady", n, !1));
 	}
 	function m() {
-		b.invoke ||
-			((b.invoke = function(n, i, t) {
+		N.invoke ||
+			((N.invoke = function(n, i, t) {
 				e.WeixinJSBridge && WeixinJSBridge.invoke(n, o(i), t);
 			}),
-			(b.on = function(n, i) {
+			(N.on = function(n, i) {
 				e.WeixinJSBridge && WeixinJSBridge.on(n, i);
 			}));
 	}
@@ -248,7 +247,7 @@
 		});
 		var O = !1,
 			E = [],
-			b = {
+			N = {
 				config: function(e) {
 					(C = e), u("config", e);
 					var n = !1 !== C.check;
@@ -288,7 +287,7 @@
 							L._completes = [];
 						}
 					}),
-						C.beta && m();
+						m();
 				},
 				ready: function(e) {
 					0 != B.state ? e() : (L._completes.push(e), !k && C.debug && e());
@@ -782,7 +781,7 @@
 					}
 				}
 			},
-			N = 1,
+			b = 1,
 			R = {};
 		return (
 			I.addEventListener(
@@ -798,7 +797,7 @@
 						) {
 							e.preventDefault(), e.stopPropagation();
 							var o = n["wx-id"];
-							if ((o || ((o = N++), (n["wx-id"] = o)), R[o])) return;
+							if ((o || ((o = b++), (n["wx-id"] = o)), R[o])) return;
 							(R[o] = !0),
 								wx.ready(function() {
 									wx.getLocalImgData({
@@ -828,8 +827,8 @@
 				},
 				!0
 			),
-			n && (e.wx = e.jWeixin = b),
-			b
+			n && (e.wx = e.jWeixin = N),
+			N
 		);
 	}
 });
