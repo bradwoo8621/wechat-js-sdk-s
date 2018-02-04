@@ -25,12 +25,12 @@
 	function e(a) {
 		return (
 			(a = a || {}),
-			(a.appId = D.appId),
-			(a.verifyAppId = D.appId),
+			(a.appId = E.appId),
+			(a.verifyAppId = E.appId),
 			(a.verifySignType = "sha1"),
-			(a.verifyTimestamp = D.timestamp + ""),
-			(a.verifyNonceStr = D.nonceStr),
-			(a.verifySignature = D.signature),
+			(a.verifyTimestamp = E.timestamp + ""),
+			(a.verifyNonceStr = E.nonceStr),
+			(a.verifySignature = E.signature),
 			a
 		);
 	}
@@ -68,7 +68,7 @@
 			(c = c || {}),
 			c._complete && (c._complete(b), delete c._complete),
 			(d = b.errMsg || ""),
-			D.debug && !c.isInnerInvoke && alert(JSON.stringify(b));
+			E.debug && !c.isInnerInvoke && alert(JSON.stringify(b));
 		var e = d.indexOf(":"),
 			f = d.substring(e + 1);
 		switch (f) {
@@ -85,7 +85,7 @@
 	}
 	function i(a, b) {
 		var c = a,
-			d = q[c];
+			d = r[c];
 		d && (c = d);
 		var e = "ok";
 		if (b) {
@@ -108,49 +108,49 @@
 		if (a) {
 			for (var b = 0, c = a.length; c > b; ++b) {
 				var d = a[b],
-					e = p[d];
+					e = q[d];
 				e && (a[b] = e);
 			}
 			return a;
 		}
 	}
 	function k(a, b) {
-		if (!(!D.debug || (b && b.isInnerInvoke))) {
-			var c = q[a];
+		if (!(!E.debug || (b && b.isInnerInvoke))) {
+			var c = r[a];
 			c && (a = c),
 				b && b._complete && delete b._complete,
 				console.log('"' + a + '",', b || "");
 		}
 	}
 	function l(a) {
-		if (!(v || w || D.debug || "6.0.2" > A || C.systemType < 0)) {
+		if (!(w || x || E.debug || "6.0.2" > B || D.systemType < 0)) {
 			var b = new Image();
-			(C.appId = D.appId),
-				(C.initTime = B.initEndTime - B.initStartTime),
-				(C.preVerifyTime = B.preVerifyEndTime - B.preVerifyStartTime),
-				I.getNetworkType({
+			(D.appId = E.appId),
+				(D.initTime = C.initEndTime - C.initStartTime),
+				(D.preVerifyTime = C.preVerifyEndTime - C.preVerifyStartTime),
+				J.getNetworkType({
 					isInnerInvoke: !0,
 					success: function(a) {
-						C.networkType = a.networkType;
+						D.networkType = a.networkType;
 						var c =
 							"https://open.weixin.qq.com/sdk/report?v=" +
-							C.version +
+							D.version +
 							"&o=" +
-							C.isPreVerifyOk +
+							D.isPreVerifyOk +
 							"&s=" +
-							C.systemType +
+							D.systemType +
 							"&c=" +
-							C.clientVersion +
+							D.clientVersion +
 							"&a=" +
-							C.appId +
+							D.appId +
 							"&n=" +
-							C.networkType +
+							D.networkType +
 							"&i=" +
-							C.initTime +
+							D.initTime +
 							"&p=" +
-							C.preVerifyTime +
+							D.preVerifyTime +
 							"&u=" +
-							C.url;
+							D.url;
 						b.src = c;
 					}
 				});
@@ -160,23 +160,34 @@
 		return new Date().getTime();
 	}
 	function n(b) {
-		x &&
+		y &&
 			(a.WeixinJSBridge
-				? b()
-				: r.addEventListener &&
-					r.addEventListener("WeixinJSBridgeReady", b, !1));
+				? "preInject" === s.__wxjsjs__isPreInject
+					? s.addEventListener &&
+						s.addEventListener("WeixinJSBridgeReady", b, !1)
+					: b()
+				: s.addEventListener &&
+					s.addEventListener("WeixinJSBridgeReady", b, !1));
 	}
 	function o() {
-		I.invoke ||
-			((I.invoke = function(b, c, d) {
+		J.invoke ||
+			((J.invoke = function(b, c, d) {
 				a.WeixinJSBridge && WeixinJSBridge.invoke(b, e(c), d);
 			}),
-			(I.on = function(b, c) {
+			(J.on = function(b, c) {
 				a.WeixinJSBridge && WeixinJSBridge.on(b, c);
 			}));
 	}
+	function p(a) {
+		if ("string" == typeof a && a.length > 0) {
+			var b = a.split("?")[0],
+				c = a.split("?")[1];
+			return (b += ".html"), "undefined" != typeof c ? b + "?" + c : b;
+		}
+		return void 0;
+	}
 	if (!a.jWeixin) {
-		var p = {
+		var q = {
 				config: "preVerifyJSAPI",
 				onMenuShareTimeline: "menu:share:timeline",
 				onMenuShareAppMessage: "menu:share:appmessage",
@@ -196,104 +207,104 @@
 				consumeAndShareCard: "consumedShareCard",
 				openAddress: "editAddress"
 			},
-			q = (function() {
+			r = (function() {
 				var a = {};
-				for (var b in p) a[p[b]] = b;
+				for (var b in q) a[q[b]] = b;
 				return a;
 			})(),
-			r = a.document,
-			s = r.title,
-			t = navigator.userAgent.toLowerCase(),
-			u = navigator.platform.toLowerCase(),
-			v = !(!u.match("mac") && !u.match("win")),
-			w = -1 != t.indexOf("wxdebugger"),
-			x = -1 != t.indexOf("micromessenger"),
-			y = -1 != t.indexOf("android"),
-			z = -1 != t.indexOf("iphone") || -1 != t.indexOf("ipad"),
-			A = (function() {
+			s = a.document,
+			t = s.title,
+			u = navigator.userAgent.toLowerCase(),
+			v = navigator.platform.toLowerCase(),
+			w = !(!v.match("mac") && !v.match("win")),
+			x = -1 != u.indexOf("wxdebugger"),
+			y = -1 != u.indexOf("micromessenger"),
+			z = -1 != u.indexOf("android"),
+			A = -1 != u.indexOf("iphone") || -1 != u.indexOf("ipad"),
+			B = (function() {
 				var a =
-					t.match(/micromessenger\/(\d+\.\d+\.\d+)/) ||
-					t.match(/micromessenger\/(\d+\.\d+)/);
+					u.match(/micromessenger\/(\d+\.\d+\.\d+)/) ||
+					u.match(/micromessenger\/(\d+\.\d+)/);
 				return a ? a[1] : "";
 			})(),
-			B = {
+			C = {
 				initStartTime: m(),
 				initEndTime: 0,
 				preVerifyStartTime: 0,
 				preVerifyEndTime: 0
 			},
-			C = {
+			D = {
 				version: 1,
 				appId: "",
 				initTime: 0,
 				preVerifyTime: 0,
 				networkType: "",
 				isPreVerifyOk: 1,
-				systemType: z ? 1 : y ? 2 : -1,
-				clientVersion: A,
+				systemType: A ? 1 : z ? 2 : -1,
+				clientVersion: B,
 				url: encodeURIComponent(location.href)
 			},
-			D = {},
-			E = { _completes: [] },
-			F = { state: 0, data: {} };
+			E = {},
+			F = { _completes: [] },
+			G = { state: 0, data: {} };
 		n(function() {
-			B.initEndTime = m();
+			C.initEndTime = m();
 		});
-		var G = !1,
-			H = [],
-			I = {
+		var H = !1,
+			I = [],
+			J = {
 				config: function(a) {
-					(D = a), k("config", a);
-					var b = D.check === !1 ? !1 : !0;
+					(E = a), k("config", a);
+					var b = E.check === !1 ? !1 : !0;
 					n(function() {
 						if (b)
 							c(
-								p.config,
-								{ verifyJsApiList: j(D.jsApiList) },
+								q.config,
+								{ verifyJsApiList: j(E.jsApiList) },
 								(function() {
-									(E._complete = function(a) {
-										(B.preVerifyEndTime = m()), (F.state = 1), (F.data = a);
+									(F._complete = function(a) {
+										(C.preVerifyEndTime = m()), (G.state = 1), (G.data = a);
 									}),
-										(E.success = function(a) {
-											C.isPreVerifyOk = 0;
+										(F.success = function(a) {
+											D.isPreVerifyOk = 0;
 										}),
-										(E.fail = function(a) {
-											E._fail ? E._fail(a) : (F.state = -1);
+										(F.fail = function(a) {
+											F._fail ? F._fail(a) : (G.state = -1);
 										});
-									var a = E._completes;
+									var a = F._completes;
 									return (
 										a.push(function() {
 											l();
 										}),
-										(E.complete = function(b) {
+										(F.complete = function(b) {
 											for (var c = 0, d = a.length; d > c; ++c) a[c]();
-											E._completes = [];
+											F._completes = [];
 										}),
-										E
+										F
 									);
 								})()
 							),
-								(B.preVerifyStartTime = m());
+								(C.preVerifyStartTime = m());
 						else {
-							F.state = 1;
-							for (var a = E._completes, d = 0, e = a.length; e > d; ++d)
+							G.state = 1;
+							for (var a = F._completes, d = 0, e = a.length; e > d; ++d)
 								a[d]();
-							E._completes = [];
+							F._completes = [];
 						}
 					}),
-						D.beta && o();
+						E.beta && o();
 				},
 				ready: function(a) {
-					0 != F.state ? a() : (E._completes.push(a), !x && D.debug && a());
+					0 != G.state ? a() : (F._completes.push(a), !y && E.debug && a());
 				},
 				error: function(a) {
-					"6.0.2" > A || (-1 == F.state ? a(F.data) : (E._fail = a));
+					"6.0.2" > B || (-1 == G.state ? a(G.data) : (F._fail = a));
 				},
 				checkJsApi: function(a) {
 					var b = function(a) {
 						var b = a.checkResult;
 						for (var c in b) {
-							var d = q[c];
+							var d = r[c];
 							d && ((b[d] = b[c]), delete b[c]);
 						}
 						return a;
@@ -304,7 +315,7 @@
 						(function() {
 							return (
 								(a._complete = function(a) {
-									if (y) {
+									if (z) {
 										var c = a.checkResult;
 										c && (a.checkResult = JSON.parse(c));
 									}
@@ -317,14 +328,14 @@
 				},
 				onMenuShareTimeline: function(a) {
 					d(
-						p.onMenuShareTimeline,
+						q.onMenuShareTimeline,
 						{
 							complete: function() {
 								c(
 									"shareTimeline",
 									{
-										title: a.title || s,
-										desc: a.title || s,
+										title: a.title || t,
+										desc: a.title || t,
 										img_url: a.imgUrl || "",
 										link: a.link || location.href,
 										type: a.type || "link",
@@ -339,13 +350,13 @@
 				},
 				onMenuShareAppMessage: function(a) {
 					d(
-						p.onMenuShareAppMessage,
+						q.onMenuShareAppMessage,
 						{
 							complete: function() {
 								c(
 									"sendAppMessage",
 									{
-										title: a.title || s,
+										title: a.title || t,
 										desc: a.desc || "",
 										link: a.link || location.href,
 										img_url: a.imgUrl || "",
@@ -361,13 +372,13 @@
 				},
 				onMenuShareQQ: function(a) {
 					d(
-						p.onMenuShareQQ,
+						q.onMenuShareQQ,
 						{
 							complete: function() {
 								c(
 									"shareQQ",
 									{
-										title: a.title || s,
+										title: a.title || t,
 										desc: a.desc || "",
 										img_url: a.imgUrl || "",
 										link: a.link || location.href
@@ -381,13 +392,13 @@
 				},
 				onMenuShareWeibo: function(a) {
 					d(
-						p.onMenuShareWeibo,
+						q.onMenuShareWeibo,
 						{
 							complete: function() {
 								c(
 									"shareWeiboApp",
 									{
-										title: a.title || s,
+										title: a.title || t,
 										desc: a.desc || "",
 										img_url: a.imgUrl || "",
 										link: a.link || location.href
@@ -401,13 +412,13 @@
 				},
 				onMenuShareQZone: function(a) {
 					d(
-						p.onMenuShareQZone,
+						q.onMenuShareQZone,
 						{
 							complete: function() {
 								c(
 									"shareQZone",
 									{
-										title: a.title || s,
+										title: a.title || t,
 										desc: a.desc || "",
 										img_url: a.imgUrl || "",
 										link: a.link || location.href
@@ -482,7 +493,7 @@
 						(function() {
 							return (
 								(a._complete = function(a) {
-									if (y) {
+									if (z) {
 										var b = a.localIds;
 										b && (a.localIds = JSON.parse(b));
 									}
@@ -494,7 +505,7 @@
 				},
 				getLocation: function(a) {},
 				previewImage: function(a) {
-					c(p.previewImage, { current: a.current, urls: a.urls }, a);
+					c(q.previewImage, { current: a.current, urls: a.urls }, a);
 				},
 				uploadImage: function(a) {
 					c(
@@ -517,16 +528,16 @@
 					);
 				},
 				getLocalImgData: function(a) {
-					G === !1
-						? ((G = !0),
+					H === !1
+						? ((H = !0),
 							c(
 								"getLocalImgData",
 								{ localId: a.localId },
 								(function() {
 									return (
 										(a._complete = function(a) {
-											if (((G = !1), H.length > 0)) {
-												var b = H.shift();
+											if (((H = !1), I.length > 0)) {
+												var b = I.shift();
 												wx.getLocalImgData(b);
 											}
 										}),
@@ -534,7 +545,7 @@
 									);
 								})()
 							))
-						: H.push(a);
+						: I.push(a);
 				},
 				getNetworkType: function(a) {
 					var b = function(a) {
@@ -587,7 +598,7 @@
 				getLocation: function(a) {
 					(a = a || {}),
 						c(
-							p.getLocation,
+							q.getLocation,
 							{ type: a.type || "wgs84" },
 							(function() {
 								return (
@@ -631,7 +642,7 @@
 							(function() {
 								return (
 									(a._complete = function(a) {
-										if (z) {
+										if (A) {
 											var b = a.resultStr;
 											if (b) {
 												var c = JSON.parse(b);
@@ -647,7 +658,7 @@
 				},
 				openAddress: function(a) {
 					c(
-						p.openAddress,
+						q.openAddress,
 						{},
 						(function() {
 							return (
@@ -661,7 +672,7 @@
 				},
 				openProductSpecificView: function(a) {
 					c(
-						p.openProductSpecificView,
+						q.openProductSpecificView,
 						{
 							pid: a.productId,
 							view_type: a.viewType || 0,
@@ -677,7 +688,7 @@
 						d.push(h);
 					}
 					c(
-						p.addCard,
+						q.addCard,
 						{ card_list: d },
 						(function() {
 							return (
@@ -706,7 +717,7 @@
 					c(
 						"chooseCard",
 						{
-							app_id: D.appId,
+							app_id: E.appId,
 							location_id: a.shopId || "",
 							sign_type: a.signType || "SHA1",
 							card_id: a.cardId || "",
@@ -731,29 +742,29 @@
 							h = { card_id: g.cardId, code: g.code };
 						d.push(h);
 					}
-					c(p.openCard, { card_list: d }, a);
+					c(q.openCard, { card_list: d }, a);
 				},
 				consumeAndShareCard: function(a) {
 					c(
-						p.consumeAndShareCard,
+						q.consumeAndShareCard,
 						{ consumedCardId: a.cardId, consumedCode: a.code },
 						a
 					);
 				},
 				chooseWXPay: function(a) {
-					c(p.chooseWXPay, f(a), a);
+					c(q.chooseWXPay, f(a), a);
 				},
 				openEnterpriseRedPacket: function(a) {
-					c(p.openEnterpriseRedPacket, f(a), a);
+					c(q.openEnterpriseRedPacket, f(a), a);
 				},
 				startSearchBeacons: function(a) {
-					c(p.startSearchBeacons, { ticket: a.ticket }, a);
+					c(q.startSearchBeacons, { ticket: a.ticket }, a);
 				},
 				stopSearchBeacons: function(a) {
-					c(p.stopSearchBeacons, {}, a);
+					c(q.stopSearchBeacons, {}, a);
 				},
 				onSearchBeacons: function(a) {
-					d(p.onSearchBeacons, a);
+					d(q.onSearchBeacons, a);
 				},
 				openEnterpriseChat: function(a) {
 					c(
@@ -761,15 +772,26 @@
 						{ useridlist: a.userIds, chatname: a.groupName },
 						a
 					);
+				},
+				launchMiniProgram: function(a) {
+					c(
+						"launchMiniProgram",
+						{
+							targetAppId: a.targetAppId,
+							path: p(a.path),
+							envVersion: a.envVersion
+						},
+						a
+					);
 				}
 			},
-			J = 1,
-			K = {};
+			K = 1,
+			L = {};
 		return (
-			r.addEventListener(
+			s.addEventListener(
 				"error",
 				function(a) {
-					if (!y) {
+					if (!z) {
 						var b = a.target,
 							c = b.tagName,
 							d = b.src;
@@ -778,8 +800,8 @@
 							if (e) {
 								a.preventDefault(), a.stopPropagation();
 								var f = b["wx-id"];
-								if ((f || ((f = J++), (b["wx-id"] = f)), K[f])) return;
-								(K[f] = !0),
+								if ((f || ((f = K++), (b["wx-id"] = f)), L[f])) return;
+								(L[f] = !0),
 									wx.ready(function() {
 										wx.getLocalImgData({
 											localId: d,
@@ -794,23 +816,23 @@
 				},
 				!0
 			),
-			r.addEventListener(
+			s.addEventListener(
 				"load",
 				function(a) {
-					if (!y) {
+					if (!z) {
 						var b = a.target,
 							c = b.tagName;
 						b.src;
 						if ("IMG" == c || "VIDEO" == c || "AUDIO" == c || "SOURCE" == c) {
 							var d = b["wx-id"];
-							d && (K[d] = !1);
+							d && (L[d] = !1);
 						}
 					}
 				},
 				!0
 			),
-			b && (a.wx = a.jWeixin = I),
-			I
+			b && (a.wx = a.jWeixin = J),
+			J
 		);
 	}
 });
