@@ -33,9 +33,9 @@ NPM已经上有很多相同目的的库, 但是版本不一致, 因此本库的�
 
 Supported versions as below:  
 本库的版本支持的版本如下:  
-* `1.2.0`
-* `1.2.1`
-* `1.2.2`
-* `1.3.0`
-* `1.3.1`
-* `1.3.2`
+* `1.2.0`: https://res.wx.qq.com/open/js/jweixin-1.2.0.js
+* `1.2.1`: https://res.wx.qq.com/open/js/jweixin-1.2.1.js
+* `1.2.2`: https://res.wx.qq.com/open/js/jweixin-1.2.2.js
+* `1.3.0`: https://res.wx.qq.com/open/js/jweixin-1.3.0.js
+* `1.3.1`: https://res.wx.qq.com/open/js/jweixin-1.3.1.js
+* `1.3.2`: https://res.wx.qq.com/open/js/jweixin-1.3.2.js
