@@ -1,6 +1,6 @@
 {
   "name": "wechat-js-sdk-s",
-  "version": "1.4.0",
+  "version": "1.4.0a",
   "description": "wechat javascript sdk for npm, version is same as sdk itself",
   "main": "index.js",
   "scripts": {
