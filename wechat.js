@@ -1,34 +1,33 @@
 !(function(e, n) {
-	"function" == typeof define && (define.amd || define.cmd)
+	'function' == typeof define && (define.amd || define.cmd)
 		? define(function() {
 				return n(e);
-			})
+		  })
 		: n(e, !0);
-
-// for webpack purpose, change this to window
-// })(this, function(e, n) {
-})(window, function(e, n) {
+})(this, function(e, n) {
 	function i(n, i, t) {
 		e.WeixinJSBridge
 			? WeixinJSBridge.invoke(n, o(i), function(e) {
 					c(n, e, t);
-				})
+			  })
 			: u(n, t);
 	}
 	function t(n, i, t) {
 		e.WeixinJSBridge
 			? WeixinJSBridge.on(n, function(e) {
 					t && t.trigger && t.trigger(e), c(n, e, i);
-				})
-			: t ? u(n, t) : u(n, i);
+			  })
+			: t
+			? u(n, t)
+			: u(n, i);
 	}
 	function o(e) {
 		return (
 			(e = e || {}),
 			(e.appId = C.appId),
 			(e.verifyAppId = C.appId),
-			(e.verifySignType = "sha1"),
-			(e.verifyTimestamp = C.timestamp + ""),
+			(e.verifySignType = 'sha1'),
+			(e.verifyTimestamp = C.timestamp + ''),
 			(e.verifyNonceStr = C.nonceStr),
 			(e.verifySignature = C.signature),
 			e
@@ -36,11 +35,11 @@
 	}
 	function r(e) {
 		return {
-			timeStamp: e.timestamp + "",
+			timeStamp: e.timestamp + '',
 			nonceStr: e.nonceStr,
 			package: e.package,
 			paySign: e.paySign,
-			signType: e.signType || "SHA1"
+			signType: e.signType || 'SHA1'
 		};
 	}
 	function a(e) {
@@ -59,21 +58,21 @@
 		);
 	}
 	function c(e, n, i) {
-		"openEnterpriseChat" == e && (n.errCode = n.err_code),
+		'openEnterpriseChat' == e && (n.errCode = n.err_code),
 			delete n.err_code,
 			delete n.err_desc,
 			delete n.err_detail;
 		var t = n.errMsg;
 		t || ((t = n.err_msg), delete n.err_msg, (t = s(e, t)), (n.errMsg = t)),
 			(i = i || {})._complete && (i._complete(n), delete i._complete),
-			(t = n.errMsg || ""),
+			(t = n.errMsg || ''),
 			C.debug && !i.isInnerInvoke && alert(JSON.stringify(n));
-		var o = t.indexOf(":");
+		var o = t.indexOf(':');
 		switch (t.substring(o + 1)) {
-			case "ok":
+			case 'ok':
 				i.success && i.success(n);
 				break;
-			case "cancel":
+			case 'cancel':
 				i.cancel && i.cancel(n);
 				break;
 			default:
@@ -85,20 +84,21 @@
 		var i = e,
 			t = v[i];
 		t && (i = t);
-		var o = "ok";
+		var o = 'ok';
 		if (n) {
-			var r = n.indexOf(":");
-			"confirm" == (o = n.substring(r + 1)) && (o = "ok"),
-				"failed" == o && (o = "fail"),
-				-1 != o.indexOf("failed_") && (o = o.substring(7)),
-				-1 != o.indexOf("fail_") && (o = o.substring(5)),
-				("access denied" != (o = (o = o.replace(/_/g, " ")).toLowerCase()) &&
-					"no permission to execute" != o) ||
-					(o = "permission denied"),
-				"config" == i && "function not exist" == o && (o = "ok"),
-				"" == o && (o = "fail");
+			var r = n.indexOf(':');
+			'confirm' == (o = n.substring(r + 1)) && (o = 'ok'),
+				'failed' == o && (o = 'fail'),
+				-1 != o.indexOf('failed_') && (o = o.substring(7)),
+				-1 != o.indexOf('fail_') && (o = o.substring(5)),
+				('access denied' !=
+					(o = (o = o.replace(/_/g, ' ')).toLowerCase()) &&
+					'no permission to execute' != o) ||
+					(o = 'permission denied'),
+				'config' == i && 'function not exist' == o && (o = 'ok'),
+				'' == o && (o = 'fail');
 		}
-		return (n = i + ":" + o);
+		return (n = i + ':' + o);
 	}
 	function d(e) {
 		if (e) {
@@ -115,38 +115,38 @@
 			var i = v[e];
 			i && (e = i),
 				n && n._complete && delete n._complete,
-				console.log('"' + e + '",', n || "");
+				console.log('"' + e + '",', n || '');
 		}
 	}
 	function l(e) {
-		if (!(w || T || C.debug || x < "6.0.2" || A.systemType < 0)) {
+		if (!(k || w || C.debug || x < '6.0.2' || V.systemType < 0)) {
 			var n = new Image();
-			(A.appId = C.appId),
-				(A.initTime = V.initEndTime - V.initStartTime),
-				(A.preVerifyTime = V.preVerifyEndTime - V.preVerifyStartTime),
+			(V.appId = C.appId),
+				(V.initTime = A.initEndTime - A.initStartTime),
+				(V.preVerifyTime = A.preVerifyEndTime - A.preVerifyStartTime),
 				N.getNetworkType({
 					isInnerInvoke: !0,
 					success: function(e) {
-						A.networkType = e.networkType;
+						V.networkType = e.networkType;
 						var i =
-							"https://open.weixin.qq.com/sdk/report?v=" +
-							A.version +
-							"&o=" +
-							A.isPreVerifyOk +
-							"&s=" +
-							A.systemType +
-							"&c=" +
-							A.clientVersion +
-							"&a=" +
-							A.appId +
-							"&n=" +
-							A.networkType +
-							"&i=" +
-							A.initTime +
-							"&p=" +
-							A.preVerifyTime +
-							"&u=" +
-							A.url;
+							'https://open.weixin.qq.com/sdk/report?v=' +
+							V.version +
+							'&o=' +
+							V.isPreVerifyOk +
+							'&s=' +
+							V.systemType +
+							'&c=' +
+							V.clientVersion +
+							'&a=' +
+							V.appId +
+							'&n=' +
+							V.networkType +
+							'&i=' +
+							V.initTime +
+							'&p=' +
+							V.preVerifyTime +
+							'&u=' +
+							V.url;
 						n.src = i;
 					}
 				});
@@ -156,14 +156,11 @@
 		return new Date().getTime();
 	}
 	function f(n) {
-		k &&
+		T &&
 			(e.WeixinJSBridge
-				? "preInject" === I.__wxjsjs__isPreInject
-					? I.addEventListener &&
-						I.addEventListener("WeixinJSBridgeReady", n, !1)
-					: n()
-				: I.addEventListener &&
-					I.addEventListener("WeixinJSBridgeReady", n, !1));
+				? n()
+				: S.addEventListener &&
+				  S.addEventListener('WeixinJSBridgeReady', n, !1));
 	}
 	function m() {
 		N.invoke ||
@@ -175,65 +172,65 @@
 			}));
 	}
 	function g(e) {
-		if ("string" == typeof e && e.length > 0) {
-			var n = e.split("?")[0],
-				i = e.split("?")[1];
-			return (n += ".html"), void 0 !== i ? n + "?" + i : n;
+		if ('string' == typeof e && e.length > 0) {
+			var n = e.split('?')[0],
+				i = e.split('?')[1];
+			return (n += '.html'), void 0 !== i ? n + '?' + i : n;
 		}
 	}
 	if (!e.jWeixin) {
 		var h = {
-				config: "preVerifyJSAPI",
-				onMenuShareTimeline: "menu:share:timeline",
-				onMenuShareAppMessage: "menu:share:appmessage",
-				onMenuShareQQ: "menu:share:qq",
-				onMenuShareWeibo: "menu:share:weiboApp",
-				onMenuShareQZone: "menu:share:QZone",
-				previewImage: "imagePreview",
-				getLocation: "geoLocation",
-				openProductSpecificView: "openProductViewWithPid",
-				addCard: "batchAddCard",
-				openCard: "batchViewCard",
-				chooseWXPay: "getBrandWCPayRequest",
-				openEnterpriseRedPacket: "getRecevieBizHongBaoRequest",
-				startSearchBeacons: "startMonitoringBeacons",
-				stopSearchBeacons: "stopMonitoringBeacons",
-				onSearchBeacons: "onBeaconsInRange",
-				consumeAndShareCard: "consumedShareCard",
-				openAddress: "editAddress"
+				config: 'preVerifyJSAPI',
+				onMenuShareTimeline: 'menu:share:timeline',
+				onMenuShareAppMessage: 'menu:share:appmessage',
+				onMenuShareQQ: 'menu:share:qq',
+				onMenuShareWeibo: 'menu:share:weiboApp',
+				onMenuShareQZone: 'menu:share:QZone',
+				previewImage: 'imagePreview',
+				getLocation: 'geoLocation',
+				openProductSpecificView: 'openProductViewWithPid',
+				addCard: 'batchAddCard',
+				openCard: 'batchViewCard',
+				chooseWXPay: 'getBrandWCPayRequest',
+				openEnterpriseRedPacket: 'getRecevieBizHongBaoRequest',
+				startSearchBeacons: 'startMonitoringBeacons',
+				stopSearchBeacons: 'stopMonitoringBeacons',
+				onSearchBeacons: 'onBeaconsInRange',
+				consumeAndShareCard: 'consumedShareCard',
+				openAddress: 'editAddress'
 			},
 			v = (function() {
 				var e = {};
 				for (var n in h) e[h[n]] = n;
 				return e;
 			})(),
-			I = e.document,
-			S = I.title,
+			S = e.document,
+			I = S.title,
 			y = navigator.userAgent.toLowerCase(),
 			_ = navigator.platform.toLowerCase(),
-			w = !(!_.match("mac") && !_.match("win")),
-			T = -1 != y.indexOf("wxdebugger"),
-			k = -1 != y.indexOf("micromessenger"),
-			M = -1 != y.indexOf("android"),
-			P = -1 != y.indexOf("iphone") || -1 != y.indexOf("ipad"),
+			k = !(!_.match('mac') && !_.match('win')),
+			w = -1 != y.indexOf('wxdebugger'),
+			T = -1 != y.indexOf('micromessenger'),
+			M = -1 != y.indexOf('android'),
+			P = -1 != y.indexOf('iphone') || -1 != y.indexOf('ipad'),
 			x = (function() {
 				var e =
 					y.match(/micromessenger\/(\d+\.\d+\.\d+)/) ||
 					y.match(/micromessenger\/(\d+\.\d+)/);
-				return e ? e[1] : "";
+				return e ? e[1] : '';
 			})(),
-			V = {
+			A = {
 				initStartTime: p(),
 				initEndTime: 0,
 				preVerifyStartTime: 0,
 				preVerifyEndTime: 0
 			},
-			A = {
+			V = {
 				version: 1,
-				appId: "",
+				appId: '',
 				initTime: 0,
 				preVerifyTime: 0,
-				networkType: "",
+				networkType: '',
 				isPreVerifyOk: 1,
 				systemType: P ? 1 : M ? 2 : -1,
 				clientVersion: x,
@@ -243,13 +240,13 @@
 			L = { _completes: [] },
 			B = { state: 0, data: {} };
 		f(function() {
-			V.initEndTime = p();
+			A.initEndTime = p();
 		});
-		var E = !1,
-			O = [],
+		var O = !1,
+			E = [],
 			N = {
 				config: function(e) {
-					(C = e), u("config", e);
+					(C = e), u('config', e);
 					var n = !1 !== C.check;
 					f(function() {
 						if (n)
@@ -258,13 +255,17 @@
 								{ verifyJsApiList: d(C.jsApiList) },
 								(function() {
 									(L._complete = function(e) {
-										(V.preVerifyEndTime = p()), (B.state = 1), (B.data = e);
+										(A.preVerifyEndTime = p()),
+											(B.state = 1),
+											(B.data = e);
 									}),
 										(L.success = function(e) {
-											A.isPreVerifyOk = 0;
+											V.isPreVerifyOk = 0;
 										}),
 										(L.fail = function(e) {
-											L._fail ? L._fail(e) : (B.state = -1);
+											L._fail
+												? L._fail(e)
+												: (B.state = -1);
 										});
 									var e = L._completes;
 									return (
@@ -272,17 +273,26 @@
 											l();
 										}),
 										(L.complete = function(n) {
-											for (var i = 0, t = e.length; i < t; ++i) e[i]();
+											for (
+												var i = 0, t = e.length;
+												i < t;
+												++i
+											)
+												e[i]();
 											L._completes = [];
 										}),
 										L
 									);
 								})()
 							),
-								(V.preVerifyStartTime = p());
+								(A.preVerifyStartTime = p());
 						else {
 							B.state = 1;
-							for (var e = L._completes, t = 0, o = e.length; t < o; ++t)
+							for (
+								var e = L._completes, t = 0, o = e.length;
+								t < o;
+								++t
+							)
 								e[t]();
 							L._completes = [];
 						}
@@ -290,10 +300,12 @@
 						m();
 				},
 				ready: function(e) {
-					0 != B.state ? e() : (L._completes.push(e), !k && C.debug && e());
+					0 != B.state
+						? e()
+						: (L._completes.push(e), !T && C.debug && e());
 				},
 				error: function(e) {
-					x < "6.0.2" || (-1 == B.state ? e(B.data) : (L._fail = e));
+					x < '6.0.2' || (-1 == B.state ? e(B.data) : (L._fail = e));
 				},
 				checkJsApi: function(e) {
 					var n = function(e) {
@@ -305,7 +317,7 @@
 						return e;
 					};
 					i(
-						"checkJsApi",
+						'checkJsApi',
 						{ jsApiList: d(e.jsApiList) },
 						((e._complete = function(e) {
 							if (M) {
@@ -323,14 +335,14 @@
 						{
 							complete: function() {
 								i(
-									"shareTimeline",
+									'shareTimeline',
 									{
-										title: e.title || S,
-										desc: e.title || S,
-										img_url: e.imgUrl || "",
+										title: e.title || I,
+										desc: e.title || I,
+										img_url: e.imgUrl || '',
 										link: e.link || location.href,
-										type: e.type || "link",
-										data_url: e.dataUrl || ""
+										type: e.type || 'link',
+										data_url: e.dataUrl || ''
 									},
 									e
 								);
@@ -343,19 +355,28 @@
 					t(
 						h.onMenuShareAppMessage,
 						{
-							complete: function() {
-								i(
-									"sendAppMessage",
-									{
-										title: e.title || S,
-										desc: e.desc || "",
-										link: e.link || location.href,
-										img_url: e.imgUrl || "",
-										type: e.type || "link",
-										data_url: e.dataUrl || ""
-									},
-									e
-								);
+							complete: function(n) {
+								'favorite' === n.scene
+									? i('sendAppMessage', {
+											title: e.title || I,
+											desc: e.desc || '',
+											link: e.link || location.href,
+											img_url: e.imgUrl || '',
+											type: e.type || 'link',
+											data_url: e.dataUrl || ''
+									  })
+									: i(
+											'sendAppMessage',
+											{
+												title: e.title || I,
+												desc: e.desc || '',
+												link: e.link || location.href,
+												img_url: e.imgUrl || '',
+												type: e.type || 'link',
+												data_url: e.dataUrl || ''
+											},
+											e
+									  );
 							}
 						},
 						e
@@ -367,11 +388,11 @@
 						{
 							complete: function() {
 								i(
-									"shareQQ",
+									'shareQQ',
 									{
-										title: e.title || S,
-										desc: e.desc || "",
-										img_url: e.imgUrl || "",
+										title: e.title || I,
+										desc: e.desc || '',
+										img_url: e.imgUrl || '',
 										link: e.link || location.href
 									},
 									e
@@ -387,11 +408,11 @@
 						{
 							complete: function() {
 								i(
-									"shareWeiboApp",
+									'shareWeiboApp',
 									{
-										title: e.title || S,
-										desc: e.desc || "",
-										img_url: e.imgUrl || "",
+										title: e.title || I,
+										desc: e.desc || '',
+										img_url: e.imgUrl || '',
 										link: e.link || location.href
 									},
 									e
@@ -407,11 +428,11 @@
 						{
 							complete: function() {
 								i(
-									"shareQZone",
+									'shareQZone',
 									{
-										title: e.title || S,
-										desc: e.desc || "",
-										img_url: e.imgUrl || "",
+										title: e.title || I,
+										desc: e.desc || '',
+										img_url: e.imgUrl || '',
 										link: e.link || location.href
 									},
 									e
@@ -421,70 +442,94 @@
 						e
 					);
 				},
+				updateTimelineShareData: function(e) {
+					i(
+						'updateTimelineShareData',
+						{ title: e.title, link: e.link, imgUrl: e.imgUrl },
+						e
+					);
+				},
+				updateAppMessageShareData: function(e) {
+					i(
+						'updateAppMessageShareData',
+						{
+							title: e.title,
+							desc: e.desc,
+							link: e.link,
+							imgUrl: e.imgUrl
+						},
+						e
+					);
+				},
 				startRecord: function(e) {
-					i("startRecord", {}, e);
+					i('startRecord', {}, e);
 				},
 				stopRecord: function(e) {
-					i("stopRecord", {}, e);
+					i('stopRecord', {}, e);
 				},
 				onVoiceRecordEnd: function(e) {
-					t("onVoiceRecordEnd", e);
+					t('onVoiceRecordEnd', e);
 				},
 				playVoice: function(e) {
-					i("playVoice", { localId: e.localId }, e);
+					i('playVoice', { localId: e.localId }, e);
 				},
 				pauseVoice: function(e) {
-					i("pauseVoice", { localId: e.localId }, e);
+					i('pauseVoice', { localId: e.localId }, e);
 				},
 				stopVoice: function(e) {
-					i("stopVoice", { localId: e.localId }, e);
+					i('stopVoice', { localId: e.localId }, e);
 				},
 				onVoicePlayEnd: function(e) {
-					t("onVoicePlayEnd", e);
+					t('onVoicePlayEnd', e);
 				},
 				uploadVoice: function(e) {
 					i(
-						"uploadVoice",
+						'uploadVoice',
 						{
 							localId: e.localId,
-							isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1
+							isShowProgressTips:
+								0 == e.isShowProgressTips ? 0 : 1
 						},
 						e
 					);
 				},
 				downloadVoice: function(e) {
 					i(
-						"downloadVoice",
+						'downloadVoice',
 						{
 							serverId: e.serverId,
-							isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1
+							isShowProgressTips:
+								0 == e.isShowProgressTips ? 0 : 1
 						},
 						e
 					);
 				},
 				translateVoice: function(e) {
 					i(
-						"translateVoice",
+						'translateVoice',
 						{
 							localId: e.localId,
-							isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1
+							isShowProgressTips:
+								0 == e.isShowProgressTips ? 0 : 1
 						},
 						e
 					);
 				},
 				chooseImage: function(e) {
 					i(
-						"chooseImage",
+						'chooseImage',
 						{
-							scene: "1|2",
+							scene: '1|2',
 							count: e.count || 9,
-							sizeType: e.sizeType || ["original", "compressed"],
-							sourceType: e.sourceType || ["album", "camera"]
+							sizeType: e.sizeType || ['original', 'compressed'],
+							sourceType: e.sourceType || ['album', 'camera']
 						},
 						((e._complete = function(e) {
 							if (M) {
 								var n = e.localIds;
-								n && (e.localIds = JSON.parse(n));
+								try {
+									n && (e.localIds = JSON.parse(n));
+								} catch (e) {}
 							}
 						}),
 						e)
@@ -496,63 +541,65 @@
 				},
 				uploadImage: function(e) {
 					i(
-						"uploadImage",
+						'uploadImage',
 						{
 							localId: e.localId,
-							isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1
+							isShowProgressTips:
+								0 == e.isShowProgressTips ? 0 : 1
 						},
 						e
 					);
 				},
 				downloadImage: function(e) {
 					i(
-						"downloadImage",
+						'downloadImage',
 						{
 							serverId: e.serverId,
-							isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1
+							isShowProgressTips:
+								0 == e.isShowProgressTips ? 0 : 1
 						},
 						e
 					);
 				},
 				getLocalImgData: function(e) {
-					!1 === E
-						? ((E = !0),
-							i(
-								"getLocalImgData",
+					!1 === O
+						? ((O = !0),
+						  i(
+								'getLocalImgData',
 								{ localId: e.localId },
 								((e._complete = function(e) {
-									if (((E = !1), O.length > 0)) {
-										var n = O.shift();
+									if (((O = !1), E.length > 0)) {
+										var n = E.shift();
 										wx.getLocalImgData(n);
 									}
 								}),
 								e)
-							))
-						: O.push(e);
+						  ))
+						: E.push(e);
 				},
 				getNetworkType: function(e) {
 					var n = function(e) {
 						var n = e.errMsg;
-						e.errMsg = "getNetworkType:ok";
+						e.errMsg = 'getNetworkType:ok';
 						var i = e.subtype;
 						if ((delete e.subtype, i)) e.networkType = i;
 						else {
-							var t = n.indexOf(":"),
+							var t = n.indexOf(':'),
 								o = n.substring(t + 1);
 							switch (o) {
-								case "wifi":
-								case "edge":
-								case "wwan":
+								case 'wifi':
+								case 'edge':
+								case 'wwan':
 									e.networkType = o;
 									break;
 								default:
-									e.errMsg = "getNetworkType:fail";
+									e.errMsg = 'getNetworkType:fail';
 							}
 						}
 						return e;
 					};
 					i(
-						"getNetworkType",
+						'getNetworkType',
 						{},
 						((e._complete = function(e) {
 							e = n(e);
@@ -562,14 +609,14 @@
 				},
 				openLocation: function(e) {
 					i(
-						"openLocation",
+						'openLocation',
 						{
 							latitude: e.latitude,
 							longitude: e.longitude,
-							name: e.name || "",
-							address: e.address || "",
+							name: e.name || '',
+							address: e.address || '',
 							scale: e.scale || 28,
-							infoUrl: e.infoUrl || ""
+							infoUrl: e.infoUrl || ''
 						},
 						e
 					);
@@ -578,7 +625,7 @@
 					(e = e || {}),
 						i(
 							h.getLocation,
-							{ type: e.type || "wgs84" },
+							{ type: e.type || 'wgs84' },
 							((e._complete = function(e) {
 								delete e.type;
 							}),
@@ -586,39 +633,42 @@
 						);
 				},
 				hideOptionMenu: function(e) {
-					i("hideOptionMenu", {}, e);
+					i('hideOptionMenu', {}, e);
 				},
 				showOptionMenu: function(e) {
-					i("showOptionMenu", {}, e);
+					i('showOptionMenu', {}, e);
 				},
 				closeWindow: function(e) {
-					i("closeWindow", {}, (e = e || {}));
+					i('closeWindow', {}, (e = e || {}));
 				},
 				hideMenuItems: function(e) {
-					i("hideMenuItems", { menuList: e.menuList }, e);
+					i('hideMenuItems', { menuList: e.menuList }, e);
 				},
 				showMenuItems: function(e) {
-					i("showMenuItems", { menuList: e.menuList }, e);
+					i('showMenuItems', { menuList: e.menuList }, e);
 				},
 				hideAllNonBaseMenuItem: function(e) {
-					i("hideAllNonBaseMenuItem", {}, e);
+					i('hideAllNonBaseMenuItem', {}, e);
 				},
 				showAllNonBaseMenuItem: function(e) {
-					i("showAllNonBaseMenuItem", {}, e);
+					i('showAllNonBaseMenuItem', {}, e);
 				},
 				scanQRCode: function(e) {
 					i(
-						"scanQRCode",
+						'scanQRCode',
 						{
 							needResult: (e = e || {}).needResult || 0,
-							scanType: e.scanType || ["qrCode", "barCode"]
+							scanType: e.scanType || ['qrCode', 'barCode']
 						},
 						((e._complete = function(e) {
 							if (P) {
 								var n = e.resultStr;
 								if (n) {
 									var i = JSON.parse(n);
-									e.resultStr = i && i.scan_code && i.scan_code.scan_result;
+									e.resultStr =
+										i &&
+										i.scan_code &&
+										i.scan_code.scan_result;
 								}
 							}
 						}),
@@ -647,7 +697,11 @@
 					);
 				},
 				addCard: function(e) {
-					for (var n = e.cardList, t = [], o = 0, r = n.length; o < r; ++o) {
+					for (
+						var n = e.cardList, t = [], o = 0, r = n.length;
+						o < r;
+						++o
+					) {
 						var a = n[o],
 							c = { card_id: a.cardId, card_ext: a.cardExt };
 						t.push(c);
@@ -658,7 +712,11 @@
 						((e._complete = function(e) {
 							var n = e.card_list;
 							if (n) {
-								for (var i = 0, t = (n = JSON.parse(n)).length; i < t; ++i) {
+								for (
+									var i = 0, t = (n = JSON.parse(n)).length;
+									i < t;
+									++i
+								) {
 									var o = n[i];
 									(o.cardId = o.card_id),
 										(o.cardExt = o.card_ext),
@@ -675,25 +733,30 @@
 				},
 				chooseCard: function(e) {
 					i(
-						"chooseCard",
+						'chooseCard',
 						{
 							app_id: C.appId,
-							location_id: e.shopId || "",
-							sign_type: e.signType || "SHA1",
-							card_id: e.cardId || "",
-							card_type: e.cardType || "",
+							location_id: e.shopId || '',
+							sign_type: e.signType || 'SHA1',
+							card_id: e.cardId || '',
+							card_type: e.cardType || '',
 							card_sign: e.cardSign,
-							time_stamp: e.timestamp + "",
+							time_stamp: e.timestamp + '',
 							nonce_str: e.nonceStr
 						},
 						((e._complete = function(e) {
-							(e.cardList = e.choose_card_info), delete e.choose_card_info;
+							(e.cardList = e.choose_card_info),
+								delete e.choose_card_info;
 						}),
 						e)
 					);
 				},
 				openCard: function(e) {
-					for (var n = e.cardList, t = [], o = 0, r = n.length; o < r; ++o) {
+					for (
+						var n = e.cardList, t = [], o = 0, r = n.length;
+						o < r;
+						++o
+					) {
 						var a = n[o],
 							c = { card_id: a.cardId, code: a.code };
 						t.push(c);
@@ -724,14 +787,14 @@
 				},
 				openEnterpriseChat: function(e) {
 					i(
-						"openEnterpriseChat",
+						'openEnterpriseChat',
 						{ useridlist: e.userIds, chatname: e.groupName },
 						e
 					);
 				},
 				launchMiniProgram: function(e) {
 					i(
-						"launchMiniProgram",
+						'launchMiniProgram',
 						{
 							targetAppId: e.targetAppId,
 							path: g(e.path),
@@ -745,8 +808,11 @@
 						(e = e || {}),
 							f(function() {
 								i(
-									"invokeMiniProgramAPI",
-									{ name: "navigateBack", arg: { delta: e.delta || 1 } },
+									'invokeMiniProgramAPI',
+									{
+										name: 'navigateBack',
+										arg: { delta: e.delta || 1 }
+									},
 									e
 								);
 							});
@@ -754,8 +820,8 @@
 					navigateTo: function(e) {
 						f(function() {
 							i(
-								"invokeMiniProgramAPI",
-								{ name: "navigateTo", arg: { url: e.url } },
+								'invokeMiniProgramAPI',
+								{ name: 'navigateTo', arg: { url: e.url } },
 								e
 							);
 						});
@@ -763,8 +829,8 @@
 					redirectTo: function(e) {
 						f(function() {
 							i(
-								"invokeMiniProgramAPI",
-								{ name: "redirectTo", arg: { url: e.url } },
+								'invokeMiniProgramAPI',
+								{ name: 'redirectTo', arg: { url: e.url } },
 								e
 							);
 						});
@@ -772,8 +838,8 @@
 					switchTab: function(e) {
 						f(function() {
 							i(
-								"invokeMiniProgramAPI",
-								{ name: "switchTab", arg: { url: e.url } },
+								'invokeMiniProgramAPI',
+								{ name: 'switchTab', arg: { url: e.url } },
 								e
 							);
 						});
@@ -781,8 +847,8 @@
 					reLaunch: function(e) {
 						f(function() {
 							i(
-								"invokeMiniProgramAPI",
-								{ name: "reLaunch", arg: { url: e.url } },
+								'invokeMiniProgramAPI',
+								{ name: 'reLaunch', arg: { url: e.url } },
 								e
 							);
 						});
@@ -790,15 +856,18 @@
 					postMessage: function(e) {
 						f(function() {
 							i(
-								"invokeMiniProgramAPI",
-								{ name: "postMessage", arg: e.data || {} },
+								'invokeMiniProgramAPI',
+								{ name: 'postMessage', arg: e.data || {} },
 								e
 							);
 						});
 					},
 					getEnv: function(n) {
 						f(function() {
-							n({ miniprogram: "miniprogram" === e.__wxjs_environment });
+							n({
+								miniprogram:
+									'miniprogram' === e.__wxjs_environment
+							});
 						});
 					}
 				}
@@ -806,20 +875,24 @@
 			b = 1,
 			R = {};
 		return (
-			I.addEventListener(
-				"error",
+			S.addEventListener(
+				'error',
 				function(e) {
 					if (!M) {
 						var n = e.target,
 							i = n.tagName,
 							t = n.src;
 						if (
-							("IMG" == i || "VIDEO" == i || "AUDIO" == i || "SOURCE" == i) &&
-							-1 != t.indexOf("wxlocalresource://")
+							('IMG' == i ||
+								'VIDEO' == i ||
+								'AUDIO' == i ||
+								'SOURCE' == i) &&
+							-1 != t.indexOf('wxlocalresource://')
 						) {
 							e.preventDefault(), e.stopPropagation();
-							var o = n["wx-id"];
-							if ((o || ((o = b++), (n["wx-id"] = o)), R[o])) return;
+							var o = n['wx-id'];
+							if ((o || ((o = b++), (n['wx-id'] = o)), R[o]))
+								return;
 							(R[o] = !0),
 								wx.ready(function() {
 									wx.getLocalImgData({
@@ -834,15 +907,20 @@
 				},
 				!0
 			),
-			I.addEventListener(
-				"load",
+			S.addEventListener(
+				'load',
 				function(e) {
 					if (!M) {
 						var n = e.target,
 							i = n.tagName;
 						n.src;
-						if ("IMG" == i || "VIDEO" == i || "AUDIO" == i || "SOURCE" == i) {
-							var t = n["wx-id"];
+						if (
+							'IMG' == i ||
+							'VIDEO' == i ||
+							'AUDIO' == i ||
+							'SOURCE' == i
+						) {
+							var t = n['wx-id'];
 							t && (R[t] = !1);
 						}
 					}

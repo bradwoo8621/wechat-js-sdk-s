@@ -39,3 +39,4 @@ Supported versions as below:
 * `1.3.0`: https://res.wx.qq.com/open/js/jweixin-1.3.0.js
 * `1.3.1`: https://res.wx.qq.com/open/js/jweixin-1.3.1.js
 * `1.3.2`: https://res.wx.qq.com/open/js/jweixin-1.3.2.js
+* `1.4.0`: https://res.wx.qq.com/open/js/jweixin-1.4.0.js
