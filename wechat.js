@@ -4,7 +4,9 @@
 				return n(e);
 		  })
 		: n(e, !0);
-})(this, function(e, n) {
+// for webpack purpose, change this to window
+// })(this, function(e, n) {
+})(window, function(e, n) {
 	function i(n, i, t) {
 		e.WeixinJSBridge
 			? WeixinJSBridge.invoke(n, o(i), function(e) {
