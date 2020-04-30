@@ -32,7 +32,7 @@ Version is same as Wechat Javascript SDK itself.
 * 使用VSCode的`prettier`插件格式化了原始`wechat.js`文件.
 
 # Versions Supported (支持的版本)
-There are many libs for this purpose in npm, but with different version. This lib is try to let your find all wechat versions in one lib.  
+There are many libs for this purpose in npm, but with a different version. This lib is try to let your find all wechat versions in one lib.  
 NPM已经上有很多相同目的的库, 但是版本不一致, 因此本库的目的在于可以在一个库中找到不同的版本.  
 
 Supported versions as below:  
@@ -44,3 +44,4 @@ Supported versions as below:
 * `1.3.1`: https://res.wx.qq.com/open/js/jweixin-1.3.1.js
 * `1.3.2`: https://res.wx.qq.com/open/js/jweixin-1.3.2.js
 * `1.4.0-a`: https://res.wx.qq.com/open/js/jweixin-1.4.0.js
+* `1.5.0`: https://res.wx.qq.com/open/js/jweixin-1.5.0.js
